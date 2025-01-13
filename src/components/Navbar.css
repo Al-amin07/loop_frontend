@@ -1,0 +1,8 @@
+nav a.active {
+  color: orangered;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: orangered;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 10px;
+}
