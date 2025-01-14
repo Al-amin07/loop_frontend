@@ -12,6 +12,15 @@
 - **ESLint** - Linter for identifying and fixing problems in JavaScript code.
 - **Prettier** - Code formatter for maintaining consistent code style.
 
+## Credentials 
+**Admin** 
+admin@test.com
+admin123
+
+**user**
+user@test.com
+user123
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
