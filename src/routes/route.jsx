@@ -13,6 +13,12 @@ import MyDocuments from "../pages/dashboard/documents/MyDocuments";
 import DocumentReview from "../pages/dashboard/documents/DocumentReview";
 import About from "../pages/about/About";
 import Contact from "../pages/contact/Contact";
+// import Payment from "../pages/dashboard/payment/Payment";
+// import PayNow from "../pages/dashboard/payment/PayNow";
+import Complete from "../pages/redirects/Complete";
+import Error from "../pages/redirects/Error";
+import PayNow from "../pages/dashboard/payment/PayNow";
+import Invoices from "../pages/dashboard/invoice/Invoices";
 
 export const router = createBrowserRouter([
   {
@@ -58,10 +64,27 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "paypal",
+        element: (
+          <PrivateRoute>
+            {/* <Payment /> */}
+            <PayNow />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "users",
         element: (
           <AdminRoute>
             <Users />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "invoices",
+        element: (
+          <AdminRoute>
+            <Invoices />
           </AdminRoute>
         ),
       },
@@ -91,5 +114,13 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/complete-order",
+    element: <Complete />,
+  },
+  {
+    path: "/cancle-order",
+    element: <Error />,
   },
 ]);

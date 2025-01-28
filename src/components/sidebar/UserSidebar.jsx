@@ -19,6 +19,11 @@ const userMenus = [
     link: "/dashboard/payments",
     icon: MdPayments,
   },
+  {
+    name: "Paypal Payment",
+    link: "/dashboard/paypal",
+    icon: FaCreditCard,
+  },
 
   {
     name: "My Documents",

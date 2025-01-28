@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -8,8 +8,9 @@ import { format } from "date-fns";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./stripe/CheckoutForm";
+import PayNow from "./payment/PayNow";
+// import PayNow from "./payment/PayNow";
 
-// Load stripe outside of component render
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 export default function PaymentRequests() {
@@ -55,7 +56,6 @@ export default function PaymentRequests() {
     amount: "",
   });
 
-  // Calculate summary using useMemo instead of useState and useEffect
   const summary = useMemo(() => {
     return requests.reduce(
       (acc, request) => {
@@ -79,7 +79,7 @@ export default function PaymentRequests() {
       },
       { total: 0, pending: 0, approved: 0, rejected: 0 }
     );
-  }, [requests]); // Only recalculate when requests change
+  }, [requests]);
 
   const handleStatusChange = async (requestId, newStatus) => {
     createRequest({ id: requestId, status: newStatus });
@@ -170,7 +170,7 @@ export default function PaymentRequests() {
 
             <div className="space-y-6">
               {/* Payment Form */}
-              <div className="space-y-4">
+              <form className="space-y-4">
                 <div>
                   <label className="block text-lg font-medium text-gray-700 mb-1">
                     Title
@@ -203,14 +203,14 @@ export default function PaymentRequests() {
                     step="0.01"
                   />
                 </div>
-              </div>
+                <button type="submit" className="w-full mt-2">
+                  <PayNow details={newRequest} user={user} />
+                </button>
+              </form>
 
               {/* Stripe Payment Section */}
               <div className="border-t pt-6">
-                <h3 className="text-lg font-medium text-gray-700 mb-2">
-                  Payment Details
-                </h3>
-                <Elements stripe={stripePromise}>
+                {/* <Elements stripe={stripePromise}>
                   <CheckoutForm
                     refetch={refetch}
                     amount={Number(newRequest.amount) || 0}
@@ -221,7 +221,10 @@ export default function PaymentRequests() {
                       refetch();
                     }}
                   />
-                </Elements>
+                </Elements> */}
+                {/* <button type="submit">
+                  <PayNow />
+                </button> */}
               </div>
             </div>
           </div>

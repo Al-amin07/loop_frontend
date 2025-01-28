@@ -43,8 +43,12 @@ export default function DocumentReview() {
   });
 
   const handleUpdateStatus = (docId, newStatus, comments = "") => {
-    console.log({ docId, status: newStatus, comments });
-    updateStatus({ docId, status: newStatus, comments });
+    try {
+      console.log({ docId, status: newStatus, comments });
+      updateStatus({ docId, status: newStatus, comments });
+    } catch (error) {
+      toast.error(error?.message || "Something went wrong");
+    }
   };
 
   const getStatusColor = (status) => {
@@ -236,7 +240,6 @@ export default function DocumentReview() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <button
-                      // onClick={() => viewDocument(doc)}
                       onClick={() => {
                         setSelectedDoc(doc);
                         viewDocument(doc);

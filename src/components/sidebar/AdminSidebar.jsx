@@ -22,11 +22,16 @@ const adminMenus = [
     link: "/dashboard/document-review",
     icon: MdOutlineDocumentScanner,
   },
+  {
+    name: "Invoice Review",
+    link: "/dashboard/invoices",
+    icon: MdOutlineDocumentScanner,
+  },
 ];
 
 export default function AdminSidebar({ isOpen, setIsOpen, user, signOut }) {
   const location = useLocation();
-
+  console.log({ isOpen });
   return (
     <SidebarWrapper isOpen={isOpen} setIsOpen={setIsOpen} title="Admin Panel">
       <UserInfo user={user} isOpen={isOpen} />
@@ -45,8 +50,8 @@ export default function AdminSidebar({ isOpen, setIsOpen, user, signOut }) {
               style={{
                 transitionDelay: `${i + 3}00ms`,
               }}
-              className={`whitespace-pre duration-500 ${
-                !isOpen && "opacity-0 translate-x-28 overflow-hidden"
+              className={`whitespace-pre  duration-500 ${
+                !isOpen && "opacity-0  translate-x-28 overflow-hidden"
               }`}
             >
               {menu.name}
